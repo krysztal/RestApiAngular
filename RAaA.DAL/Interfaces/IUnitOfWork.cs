@@ -5,11 +5,11 @@ using RAaA.DAL.Entities;
 
 namespace RAaA.DAL.Interfaces
 {
-    interface IUnitOfWork
+    interface IUnitOfWork : IDisposable
     {
         IRepository<PCBuild> PCBuilds { get; }
-        IRepository<PCBuild> Processors { get; }
-        IRepository<PCBuild> RAMs { get; }
+        IRepository<Processor> Processors { get; }
+        IRepository<RAM> RAMs { get; }
 
         void Save();
     }

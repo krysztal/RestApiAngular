@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using RAaA.DAL.Interfaces;
 using RAaA.DAL.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace RAaA.DAL.Repositories
 {
@@ -15,9 +16,9 @@ namespace RAaA.DAL.Repositories
             db = context;
         }
 
-        public void Create(PCBuild item)
+        public void Create(PCBuild pcbuild)
         {
-            db.PCBuilds.Add(item);
+            db.PCBuilds.Add(pcbuild);
         }
 
         public void Delete(int id)
@@ -29,22 +30,22 @@ namespace RAaA.DAL.Repositories
 
         public IEnumerable<PCBuild> Find(Func<PCBuild, bool> predicate)
         {
-            throw new NotImplementedException();
+            return db.PCBuilds.Where(predicate).ToList();
         }
 
         public PCBuild Get(int id)
         {
-            throw new NotImplementedException();
+            return db.PCBuilds.Find(id);
         }
 
         public IEnumerable<PCBuild> GetAll()
         {
-            throw new NotImplementedException();
+            return db.PCBuilds;
         }
 
-        public void Update(PCBuild item)
+        public void Update(PCBuild pcbuild)
         {
-            throw new NotImplementedException();
+            db.Entry(pcbuild).State = EntityState.Modified;
         }
     }
 }
