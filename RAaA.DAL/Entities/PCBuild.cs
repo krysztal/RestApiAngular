@@ -7,6 +7,9 @@ namespace RAaA.DAL.Entities
 {
     public class PCBuild
     {
+        [Key]
+        public int Id { get; set; }
+
         [Required]
         [MaxLength(50)]
         public string Name { get; set; }
@@ -14,7 +17,9 @@ namespace RAaA.DAL.Entities
         [Required]
         public double TotalPrice { get; set; }
 
-        public ICollection<Processor> Processor { get; set; }
-        public ICollection<RAM> RAM { get; set; }
+        [MaxLength(50)]
+        public Processor Processor { get; set; }
+
+        public ICollection<PCBuildRAM> PCBuildRAMs { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using RAaA.DAL.Entities;
 
 namespace RAaA.DAL.Interfaces
 {
-    interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork : IDisposable
     {
         IRepository<PCBuild> PCBuilds { get; }
         IRepository<Processor> Processors { get; }
