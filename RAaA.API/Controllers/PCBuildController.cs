@@ -4,26 +4,26 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RAaA.DAL.Interfaces;
-
+using RAaA.API.Services;
 
 namespace RAaA.API.Controllers
 {
     [Route("api/[controller]")]
     public class PCBuildController : Controller
     {
-        IUnitOfWork _dbManager;
-        public PCBuildController(IUnitOfWork dbManager)
+        IPCBuilderService _pcBuildService;
+        public PCBuildController(IPCBuilderService pcBuildService)
         {
-            _dbManager = dbManager;
+            _pcBuildService = pcBuildService;
         }
 
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            var procs = _dbManager.Processors.GetAll().ToList();
-            if(procs.Any())
-                return new string[] { procs.First().Model, procs.First().Model };
+            var procs = _pcBuildService.GetALL();
+            if (procs.Any())
+                return new string[] { procs.First().Name, procs.First().TotalPrice.ToString() };
             return new string[] { "value1", "value2" };
         }
 

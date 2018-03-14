@@ -31,7 +31,7 @@ namespace RAaA.API
             services.AddScoped<IRepository<PCBuild>, PCBuildRepository>();
             services.AddScoped<IUnitOfWork, EFUnitOfWork>();
             //services.AddDbContext<PCBuildContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDbContext<PCBuildContext>(options => options.UseSqlServer("Data Source=KRYSZTAL-PC\\KRYSZTALSQL;Initial Catalog=PCBuild;Integrated Security=True"));
+            services.AddDbContext<PCBuildContext>(options => options.UseSqlServer("Data Source=BROPC9WBJ642;Initial Catalog=PCBuild;Integrated Security=True", b=>b.MigrationsAssembly("RAaA.DAL")));
 
             services.AddMvc();
         }

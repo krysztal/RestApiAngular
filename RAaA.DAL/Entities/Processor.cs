@@ -8,7 +8,7 @@ namespace RAaA.DAL.Entities
     public class Processor
     {
         [Key]
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [MaxLength(50)]
