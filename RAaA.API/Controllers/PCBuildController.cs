@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RAaA.DAL.Interfaces;
 using RAaA.API.Services;
+using RAaA.API.Interfaces;
 
 namespace RAaA.API.Controllers
 {
@@ -21,7 +22,7 @@ namespace RAaA.API.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            var procs = _pcBuildService.GetALL();
+            var procs = _pcBuildService.GetPCBuilds();
             if (procs.Any())
                 return new string[] { procs.First().Name, procs.First().TotalPrice.ToString() };
             return new string[] { "value1", "value2" };
