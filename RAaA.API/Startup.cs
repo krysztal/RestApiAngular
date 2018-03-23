@@ -12,6 +12,8 @@ using RAaA.DAL.Interfaces;
 using RAaA.DAL.Entities;
 using RAaA.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
+using RAaA.API.Interfaces;
+using RAaA.API.Data;
 
 namespace RAaA.API
 {
@@ -30,18 +32,22 @@ namespace RAaA.API
             services.AddScoped<IRepository<RAM>, RAMRepository>();
             services.AddScoped<IRepository<PCBuild>, PCBuildRepository>();
             services.AddScoped<IUnitOfWork, EFUnitOfWork>();
+            services.AddScoped<IDbInitializer, DbInitializer>();
+
             //services.AddDbContext<PCBuildContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDbContext<PCBuildContext>(options => options.UseSqlServer("Data Source=BROPC9WBJ642;Initial Catalog=PCBuild;Integrated Security=True", b=>b.MigrationsAssembly("RAaA.DAL")));
+            services.AddDbContext<PCBuildContext>(options => options.UseSqlServer("Data Source=KRYSZTAL-PC\\KRYSZTALSQL;Initial Catalog=PCBuild;Integrated Security=True", b => b.MigrationsAssembly("RAaA.API")));
 
             services.AddMvc();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IDbInitializer dbInitializer)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            dbInitializer.Initalize();
 
             app.UseMvc();
         }

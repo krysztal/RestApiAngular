@@ -22,7 +22,8 @@ namespace RAaA.API.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            var procs = _pcBuildService.GetPCBuilds();
+            //_pcBuildService.MakeBuild()
+            var procs = _pcBuildService.GetBuilds();
             if (procs.Any())
                 return new string[] { procs.First().Name, procs.First().TotalPrice.ToString() };
             return new string[] { "value1", "value2" };
